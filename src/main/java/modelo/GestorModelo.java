@@ -62,5 +62,4 @@ public class GestorModelo extends PersonaModelo {
                
     }
     
-    
 }

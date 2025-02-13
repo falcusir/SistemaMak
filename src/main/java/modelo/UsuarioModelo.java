@@ -8,7 +8,7 @@ package modelo;
  *
  * @author Dell Core i7
  */
-public class UsuarioModelo extends PersonaModelo {
+public class UsuarioModelo {
 
     private int idUsuario;
     private PersonaModelo idPersona;
@@ -27,20 +27,16 @@ public class UsuarioModelo extends PersonaModelo {
         this.rol = rol;
     }
 
-    public UsuarioModelo(int idUsuario, String usuario, String contraseña, String rol, int idPersona, String nombre, String apellido, String cedula, String fechaNac, String direccion, String teléfono, String correo) {
-        super(idPersona, nombre, apellido, cedula, fechaNac, direccion, teléfono, correo);
-        this.idUsuario = idUsuario;
-        this.usuario = usuario;
-        this.contraseña = contraseña;
-        this.rol = rol;
-    }
-
     public int getIdUsuario() {
         return idUsuario;
     }
 
     public void setIdUsuario(int idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public PersonaModelo getIdPersona() {
+        return idPersona;
     }
 
     public void setIdPersona(PersonaModelo idPersona) {
@@ -73,19 +69,11 @@ public class UsuarioModelo extends PersonaModelo {
 
     @Override
     public String toString() {
-
-        return "DATOS PERSONALES\n"
-                + "Nombres: " + getNombre() + "\n"
-                + "Apellidos: " + getApellido() + "\n"
-                + "Cédula: " + getCedula() + "\n"
-                + "Fecha de Nacimiento: " + getFechaNac() + "\n"
-                + "Dirección: " + getDireccion() + "\n"
-                + "Teléfono: " + getTeléfono() + "\n"
-                + "Correo Electrónico: " + getCorreo() + "\n"
-                + "Usuario: " + getUsuario() + "\n"
-                + "Contraseña: " + getContraseña() + "\n"
-                + "Rol: " + getRol();
-
+     return "DATOS USUARIO"+
+                "Usuario: "+getUsuario()+"\n"+
+                "Contraseña: "+getContraseña()+"\n"+
+                "Rol: "+getRol();
     }
 
+   
 }
