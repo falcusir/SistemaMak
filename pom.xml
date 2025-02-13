@@ -11,4 +11,18 @@
         <maven.compiler.target>15</maven.compiler.target>
         <exec.mainClass>com.mycompany.sistemamak.SistemaMak</exec.mainClass>
     </properties>
+    <dependencies>
+        
+        <!-- https://mvnrepository.com/artifact/com.mysql/mysql-connector-j -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>8.2.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE160</version>
+        </dependency>
+    </dependencies>
 </project>
