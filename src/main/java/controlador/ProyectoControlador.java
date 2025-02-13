@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.EmpleadorModelo;
+import modelo.ProyectoModelo;
 
 
 /**
@@ -20,9 +20,9 @@ import modelo.EmpleadorModelo;
 public class ProyectoControlador {
 
     //INSTANCIO UN OBJETO DEL MODELO A INSERTAR
-    private EmpleadorModelo e;
+    private ProyectoModelo pm;
     //INSTANCIAR LA CONEXIÓN A LA BASE DE DATOS
-    ConexionBDD conectar = new ConexionBDD();
+    ConexionProyectoBDD conectar = new ConexionProyectoBDD();
     //CLASE QUE ME PERMITA CONECTARME DIRECTAMENTE A MYSQL
     Connection conectado = (Connection) conectar.conectar();
     //CLASE QUE ME PERMITE EJECUTAR MI SENTENCIA SQL
@@ -31,10 +31,10 @@ public class ProyectoControlador {
     ResultSet resultado;
 
     //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarEmpleador(EmpleadorModelo e) {
+    public void insertarEmpleador(ProyectoModelo pm) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
-            String sentenciaSQL = "call insertar_empleador('"+e.getCedula()+"','"+e.getNombres()+"','"+e.getApellidos()+"','"+e.getDireccion()+"','"+e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call insertar_empleador('"+pm.getNombreProy()+"','"+pm.getDescripcionProy()+"','"+pm.getFechaInicio()+"','"+pm.getFechaFin()+"');";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
@@ -74,7 +74,7 @@ public class ProyectoControlador {
             return listaObject;
            
         } catch (SQLException p) {
-            System.out.println("ERROR SQL"+e);
+            System.out.println("ERROR SQL"+pm);
         }
         return null;
     }
@@ -107,9 +107,9 @@ public class ProyectoControlador {
         return null;
     }
     
-    public void actualizarEmpleador(EmpleadorModelo e) {
+    public void actualizarEmpleador(ProyectoModelo pm) {
         try {
-            String sentenciaSQL = "call sp_actualizarEmpleador('"+e.getCedula()+"','"+e.getNombres()+"','" + e.getApellidos()+"','"+e.getDireccion()+"','"+ e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call sp_actualizarEmpleador('"+pm.getNombreProy()+"','"+pm.getDescripcionProy()+"','"+pm.getFechaInicio()+"','"+pm.getFechaFin()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int res = ejecutar.executeUpdate();
             if (res > 0) {

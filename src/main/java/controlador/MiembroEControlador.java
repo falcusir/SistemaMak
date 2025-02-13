@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.EmpleadorModelo;
+import modelo.MiembroEModelo;
 
 
 /**
@@ -20,9 +20,9 @@ import modelo.EmpleadorModelo;
 public class MiembroEControlador {
 
     //INSTANCIO UN OBJETO DEL MODELO A INSERTAR
-    private EmpleadorModelo e;
+    private MiembroEModelo mem;
     //INSTANCIAR LA CONEXIÓN A LA BASE DE DATOS
-    ConexionBDD conectar = new ConexionBDD();
+    ConexionProyectoBDD conectar = new ConexionProyectoBDD();
     //CLASE QUE ME PERMITA CONECTARME DIRECTAMENTE A MYSQL
     Connection conectado = (Connection) conectar.conectar();
     //CLASE QUE ME PERMITE EJECUTAR MI SENTENCIA SQL
@@ -31,22 +31,22 @@ public class MiembroEControlador {
     ResultSet resultado;
 
     //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarEmpleador(EmpleadorModelo e) {
+    public void insertarMiembroE(MiembroEModelo mem) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
-            String sentenciaSQL = "call insertar_empleador('"+e.getCedula()+"','"+e.getNombres()+"','"+e.getApellidos()+"','"+e.getDireccion()+"','"+e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call insertar_empleador('"+mem.getNombre()+"','" + mem.getApellido()+"','"+mem.getCedula()+"','"+mem.getDireccion()+"','"+ mem.getCorreo()+"','"+mem.getFechaNac()+"','"+mem.getEstadoME()+"');";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null,"Empleador Creado con éxito");
+                JOptionPane.showMessageDialog(null,"Miembro del Equipo Creado con éxito");
                 ejecutar.close();
             }else{
-                JOptionPane.showMessageDialog(null,"El Empleador no ha sido creado,"
+                JOptionPane.showMessageDialog(null,"El Miembro del Equipo no ha sido creado,"
                         + " revise que los datos ingresados sean correctos");
             }
 
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             //CAPTURAR PARA DARLE UN TRATAMIENTO 
             JOptionPane.showMessageDialog(null,"Comuniquese con el Administrador para solicitar ayuda");
                 
@@ -54,7 +54,7 @@ public class MiembroEControlador {
 
     }
     
-    public ArrayList<Object[]> buscarEmpleador(String p_cedula) {
+    public ArrayList<Object[]> buscarMiembroE(String p_cedula) {
             ArrayList<Object[]> listaObject=new ArrayList<>();
         try {
             String sql = "call sp_BuscarEmpleador('%"+p_cedula+"%');";
@@ -62,24 +62,24 @@ public class MiembroEControlador {
             resultado = ejecutar.executeQuery();
             int cont = 1;
             while (resultado.next()) {
-                Object[] obempleador = new Object[9];
+                Object[] obmiembroe = new Object[9];
                 for (int i = 0; i <8; i++) {
-                    obempleador[i+1] = resultado.getObject(i+1);
+                    obmiembroe[i+1] = resultado.getObject(i+1);
                 }
-                obempleador[0]=cont;
-                listaObject.add(obempleador);
+                obmiembroe[0]=cont;
+                listaObject.add(obmiembroe);
                 cont++;
             }
             ejecutar.close();
             return listaObject;
            
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL"+e);
         }
         return null;
     }
     
-    public ArrayList<Object[]> datosEmpleadores() {
+    public ArrayList<Object[]> datosMiembrosE() {
         ArrayList<Object[]> listaObject=new ArrayList<>();
         
         try {
@@ -88,18 +88,18 @@ public class MiembroEControlador {
             resultado = ejecutar.executeQuery();
             int cont = 1;
             while (resultado.next()) {
-                Object[] obempleador = new Object[9];
+                Object[] obmiembroe = new Object[9];
                 for (int i = 0; i < 8; i++) {
-                    obempleador[i+1] = resultado.getObject(i+1);
+                    obmiembroe[i+1] = resultado.getObject(i+1);
                 }
-                obempleador[0]=cont;
-                listaObject.add(obempleador);
+                obmiembroe[0]=cont;
+                listaObject.add(obmiembroe);
                 cont++;
             }
             ejecutar.close();
             return listaObject;
 
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL CARGA EMPLEADORES");
 
         }
@@ -107,20 +107,20 @@ public class MiembroEControlador {
         return null;
     }
     
-    public void actualizarEmpleador(EmpleadorModelo e) {
+    public void actualizarMiembroE(MiembroEModelo mem) {
         try {
-            String sentenciaSQL = "call sp_actualizarEmpleador('"+e.getCedula()+"','"+e.getNombres()+"','" + e.getApellidos()+"','"+e.getDireccion()+"','"+ e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call sp_actualizarEmpleador('"+mem.getCedula()+"','"+mem.getNombre()+"','" + mem.getApellido()+"','"+mem.getDireccion()+"','"+ mem.getCorreo()+"','"+mem.getFechaNac()+"','"+mem.getEstadoME()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Empleador Actualizado con Éxito");
+                JOptionPane.showMessageDialog(null, "Miembro del Equipo Actualizado con Éxito");
             
                 ejecutar.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Revise los datos ingresados");
               
             }
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL");
         }
     }

@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.EmpleadorModelo;
+import modelo.UsuarioModelo;
 
 
 /**
@@ -20,9 +20,9 @@ import modelo.EmpleadorModelo;
 public class UsuarioControlador {
 
     //INSTANCIO UN OBJETO DEL MODELO A INSERTAR
-    private EmpleadorModelo e;
+    private UsuarioModelo um;
     //INSTANCIAR LA CONEXIÓN A LA BASE DE DATOS
-    ConexionBDD conectar = new ConexionBDD();
+    ConexionProyectoBDD conectar = new ConexionProyectoBDD();
     //CLASE QUE ME PERMITA CONECTARME DIRECTAMENTE A MYSQL
     Connection conectado = (Connection) conectar.conectar();
     //CLASE QUE ME PERMITE EJECUTAR MI SENTENCIA SQL
@@ -31,10 +31,10 @@ public class UsuarioControlador {
     ResultSet resultado;
 
     //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarEmpleador(EmpleadorModelo e) {
+    public void insertarEmpleador(UsuarioModelo um) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
-            String sentenciaSQL = "call insertar_empleador('"+e.getCedula()+"','"+e.getNombres()+"','"+e.getApellidos()+"','"+e.getDireccion()+"','"+e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call insertar_empleador('"+um.getUsuario()+"','"+um.getContraseña()+"','"+um.getRol()+"');";
             ejecutar = conectado.prepareCall(sentenciaSQL);
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
@@ -74,7 +74,7 @@ public class UsuarioControlador {
             return listaObject;
            
         } catch (SQLException p) {
-            System.out.println("ERROR SQL"+e);
+            System.out.println("ERROR SQL"+um);
         }
         return null;
     }
@@ -107,9 +107,9 @@ public class UsuarioControlador {
         return null;
     }
     
-    public void actualizarEmpleador(EmpleadorModelo e) {
+    public void actualizarEmpleador(UsuarioModelo um) {
         try {
-            String sentenciaSQL = "call sp_actualizarEmpleador('"+e.getCedula()+"','"+e.getNombres()+"','" + e.getApellidos()+"','"+e.getDireccion()+"','"+ e.getCorreoElectronico()+"','"+e.getFechaNacimiento()+"','"+e.getEmpresa()+"','"+e.getCargo()+"');";
+            String sentenciaSQL = "call sp_actualizarEmpleador('"+um.getUsuario()+"','"+um.getContraseña()+"','"+um.getRol()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int res = ejecutar.executeUpdate();
             if (res > 0) {
