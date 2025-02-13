@@ -50,7 +50,7 @@ public class GestorModelo extends PersonaModelo {
 
     @Override
     public String toString() {
-       return "DATOS PERSONALES\n"+
+       return "DATOS DEL GESTOR DEL PROYECTO\n"+
                 "Nombres: "+getNombre()+"\n"+
                 "Apellidos: "+getApellido()+"\n"+
                 "Cédula: "+getCedula()+"\n"+
