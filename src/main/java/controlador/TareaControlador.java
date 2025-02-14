@@ -31,7 +31,7 @@ public class TareaControlador {
     ResultSet resultado;
 
     //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarEmpleador(TareaModelo tm) {
+    public void insertarTarea(TareaModelo tm) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
             String sentenciaSQL = "call insertar_empleador('"+tm.getNombreTarea()+"','"+tm.getDescripcionTarea()+"','"+tm.getPrioridad()+"','"+tm.getFechaInicioTarea()+"','"+tm.getFechaFinTarea()+"','"+tm.getEstadoTarea()+"');";
@@ -39,14 +39,14 @@ public class TareaControlador {
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null,"Empleador Creado con éxito");
+                JOptionPane.showMessageDialog(null,"Tarea creada con éxito");
                 ejecutar.close();
             }else{
-                JOptionPane.showMessageDialog(null,"El Empleador no ha sido creado,"
+                JOptionPane.showMessageDialog(null,"La Tarea no ha sido creada,"
                         + " revise que los datos ingresados sean correctos");
             }
 
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             //CAPTURAR PARA DARLE UN TRATAMIENTO 
             JOptionPane.showMessageDialog(null,"Comuniquese con el Administrador para solicitar ayuda");
                 
@@ -54,7 +54,7 @@ public class TareaControlador {
 
     }
     
-    public ArrayList<Object[]> buscarEmpleador(String p_cedula) {
+    public ArrayList<Object[]> buscarTarea(String p_cedula) {
             ArrayList<Object[]> listaObject=new ArrayList<>();
         try {
             String sql = "call sp_BuscarEmpleador('%"+p_cedula+"%');";
@@ -62,24 +62,24 @@ public class TareaControlador {
             resultado = ejecutar.executeQuery();
             int cont = 1;
             while (resultado.next()) {
-                Object[] obempleador = new Object[9];
+                Object[] obtarea = new Object[9];
                 for (int i = 0; i <8; i++) {
-                    obempleador[i+1] = resultado.getObject(i+1);
+                    obtarea[i+1] = resultado.getObject(i+1);
                 }
-                obempleador[0]=cont;
-                listaObject.add(obempleador);
+                obtarea[0]=cont;
+                listaObject.add(obtarea);
                 cont++;
             }
             ejecutar.close();
             return listaObject;
            
-        } catch (SQLException p) {
-            System.out.println("ERROR SQL"+tm);
+        } catch (SQLException e) {
+            System.out.println("ERROR SQL"+e);
         }
         return null;
     }
     
-    public ArrayList<Object[]> datosEmpleadores() {
+    public ArrayList<Object[]> datosTareas() {
         ArrayList<Object[]> listaObject=new ArrayList<>();
         
         try {
@@ -88,39 +88,39 @@ public class TareaControlador {
             resultado = ejecutar.executeQuery();
             int cont = 1;
             while (resultado.next()) {
-                Object[] obempleador = new Object[9];
+                Object[] obtarea = new Object[9];
                 for (int i = 0; i < 8; i++) {
-                    obempleador[i+1] = resultado.getObject(i+1);
+                    obtarea[i+1] = resultado.getObject(i+1);
                 }
-                obempleador[0]=cont;
-                listaObject.add(obempleador);
+                obtarea[0]=cont;
+                listaObject.add(obtarea);
                 cont++;
             }
             ejecutar.close();
             return listaObject;
 
-        } catch (SQLException p) {
-            System.out.println("ERROR SQL CARGA EMPLEADORES");
+        } catch (SQLException e) {
+            System.out.println("ERROR SQL CARGA TAREAS");
 
         }
 
         return null;
     }
     
-    public void actualizarEmpleador(TareaModelo tm) {
+    public void actualizarTarea(TareaModelo tm) {
         try {
             String sentenciaSQL = "call sp_actualizarEmpleador('"+tm.getNombreTarea()+"','"+tm.getDescripcionTarea()+"','"+tm.getPrioridad()+"','"+tm.getFechaInicioTarea()+"','"+tm.getFechaFinTarea()+"','"+tm.getEstadoTarea()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Empleador Actualizado con Éxito");
+                JOptionPane.showMessageDialog(null, "Tarea Actualizada con Éxito");
             
                 ejecutar.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Revise los datos ingresados");
               
             }
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL");
         }
     }

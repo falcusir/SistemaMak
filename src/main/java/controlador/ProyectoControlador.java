@@ -31,7 +31,7 @@ public class ProyectoControlador {
     ResultSet resultado;
 
     //MÉTODOS DE TRANSACCIONABILIDAD
-    public void insertarEmpleador(ProyectoModelo pm) {
+    public void insertarProyecto(ProyectoModelo pm) {
         //1.- UTILIZAR EXCEPCIÓN
         try {//LANZAR TESTEAR UN CONJUNTO DE CÓDIGO 
             String sentenciaSQL = "call insertar_empleador('"+pm.getNombreProy()+"','"+pm.getDescripcionProy()+"','"+pm.getFechaInicio()+"','"+pm.getFechaFin()+"');";
@@ -39,14 +39,14 @@ public class ProyectoControlador {
             //TODA INSERCIÓN DEVUELVE UN ESTADO >0 CUANDO FUE FAVORABLE Y MENOR A O CUANDO NO SE REALIZÓ 
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null,"Empleador Creado con éxito");
+                JOptionPane.showMessageDialog(null,"Proyecto Creado con éxito");
                 ejecutar.close();
             }else{
-                JOptionPane.showMessageDialog(null,"El Empleador no ha sido creado,"
+                JOptionPane.showMessageDialog(null,"El Proyecto no ha sido creado,"
                         + " revise que los datos ingresados sean correctos");
             }
 
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             //CAPTURAR PARA DARLE UN TRATAMIENTO 
             JOptionPane.showMessageDialog(null,"Comuniquese con el Administrador para solicitar ayuda");
                 
@@ -54,7 +54,7 @@ public class ProyectoControlador {
 
     }
     
-    public ArrayList<Object[]> buscarEmpleador(String p_cedula) {
+    public ArrayList<Object[]> buscarProyecto(String p_cedula) {
             ArrayList<Object[]> listaObject=new ArrayList<>();
         try {
             String sql = "call sp_BuscarEmpleador('%"+p_cedula+"%');";
@@ -73,13 +73,13 @@ public class ProyectoControlador {
             ejecutar.close();
             return listaObject;
            
-        } catch (SQLException p) {
-            System.out.println("ERROR SQL"+pm);
+        } catch (SQLException e) {
+            System.out.println("ERROR SQL"+e);
         }
         return null;
     }
     
-    public ArrayList<Object[]> datosEmpleadores() {
+    public ArrayList<Object[]> datosProyecto() {
         ArrayList<Object[]> listaObject=new ArrayList<>();
         
         try {
@@ -99,7 +99,7 @@ public class ProyectoControlador {
             ejecutar.close();
             return listaObject;
 
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL CARGA EMPLEADORES");
 
         }
@@ -107,20 +107,20 @@ public class ProyectoControlador {
         return null;
     }
     
-    public void actualizarEmpleador(ProyectoModelo pm) {
+    public void actualizarProyecto(ProyectoModelo pm) {
         try {
             String sentenciaSQL = "call sp_actualizarEmpleador('"+pm.getNombreProy()+"','"+pm.getDescripcionProy()+"','"+pm.getFechaInicio()+"','"+pm.getFechaFin()+"');";
             ejecutar = (PreparedStatement) conectado.prepareCall(sentenciaSQL);
             int res = ejecutar.executeUpdate();
             if (res > 0) {
-                JOptionPane.showMessageDialog(null, "Empleador Actualizado con Éxito");
+                JOptionPane.showMessageDialog(null, "Proyecto Actualizado con Éxito");
             
                 ejecutar.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Revise los datos ingresados");
               
             }
-        } catch (SQLException p) {
+        } catch (SQLException e) {
             System.out.println("ERROR SQL");
         }
     }

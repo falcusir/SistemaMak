@@ -22,7 +22,7 @@ public class ConexionProyectoBDD {
             //Manera de Conexión a la Base de Datos jdbc---tipo de persistencia/motor/
             Class.forName("com.mysql.jdbc.Driver");
             //Parámetros de conexión url/usuario/clave en mysql
-            conexion=DriverManager.getConnection("jdbc:mysql://localhost/proyecto_kanban?autoReconnect=true&useSSL=false","root","feliz2011");
+            conexion=DriverManager.getConnection("jdbc:mysql://localhost/proyecto_kanban?autoReconnect=true&useSSL=false","root","Houkan788423/");
             System.out.println("CONECTADO"); 
         } catch (ClassNotFoundException | SQLException e)//CAPTURAR ERRORES 
         {
