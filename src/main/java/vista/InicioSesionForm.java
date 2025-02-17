@@ -11,11 +11,13 @@ import javax.swing.ImageIcon;
  *
  * @author Dell Core i7
  */
-public class InicioSesionVista2 extends javax.swing.JFrame {
+public class InicioSesionForm extends javax.swing.JFrame {
 
 
-    public InicioSesionVista2() {
+    public InicioSesionForm() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
         
 
         //this.setExtendedState(this.MAXIMIZED_BOTH);
@@ -38,8 +40,8 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
         lblContrasena = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         pfContrasena = new javax.swing.JPasswordField();
-        pnlEntrar = new javax.swing.JPanel();
-        lblEntrar = new javax.swing.JLabel();
+        btnEntrar = new javax.swing.JButton();
+        lblIniciarSesion1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setLocationByPlatform(true);
@@ -50,11 +52,11 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
 
         lblIniciarSesion.setFont(new java.awt.Font("Roboto Black", 1, 24)); // NOI18N
         lblIniciarSesion.setText("INICIAR SESIÓN");
-        jpnlBackground.add(lblIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, -1, -1));
+        jpnlBackground.add(lblIniciarSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, -1, -1));
 
         lblUsuario.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblUsuario.setText("USUARIO");
-        jpnlBackground.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
+        jpnlBackground.add(lblUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, -1, -1));
 
         txtUsuario.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
@@ -70,17 +72,17 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
                 txtUsuarioActionPerformed(evt);
             }
         });
-        jpnlBackground.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 160, 410, 30));
+        jpnlBackground.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, 410, 30));
 
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        jpnlBackground.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 410, 20));
+        jpnlBackground.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 230, 410, 20));
 
         lblContrasena.setFont(new java.awt.Font("Roboto Light", 1, 14)); // NOI18N
         lblContrasena.setText("CONTRASEÑA");
-        jpnlBackground.add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        jpnlBackground.add(lblContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        jpnlBackground.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, 410, 20));
+        jpnlBackground.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 340, 410, 20));
 
         pfContrasena.setForeground(new java.awt.Color(204, 204, 204));
         pfContrasena.setText("jPasswordField1");
@@ -90,32 +92,23 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
                 pfContrasenaActionPerformed(evt);
             }
         });
-        jpnlBackground.add(pfContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 260, 410, 30));
+        jpnlBackground.add(pfContrasena, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 310, 410, 30));
 
-        pnlEntrar.setBackground(new java.awt.Color(51, 102, 255));
+        btnEntrar.setBackground(new java.awt.Color(51, 102, 255));
+        btnEntrar.setFont(new java.awt.Font("Roboto Condensed", 1, 18)); // NOI18N
+        btnEntrar.setForeground(new java.awt.Color(255, 255, 255));
+        btnEntrar.setText("ENTRAR");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarActionPerformed(evt);
+            }
+        });
+        jpnlBackground.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 360, 100, 40));
 
-        lblEntrar.setFont(new java.awt.Font("Roboto Condensed", 1, 18)); // NOI18N
-        lblEntrar.setForeground(new java.awt.Color(255, 255, 255));
-        lblEntrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblEntrar.setText("ENTRAR");
-        lblEntrar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        javax.swing.GroupLayout pnlEntrarLayout = new javax.swing.GroupLayout(pnlEntrar);
-        pnlEntrar.setLayout(pnlEntrarLayout);
-        pnlEntrarLayout.setHorizontalGroup(
-            pnlEntrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEntrarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        pnlEntrarLayout.setVerticalGroup(
-            pnlEntrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlEntrarLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jpnlBackground.add(pnlEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 350, 100, 40));
+        lblIniciarSesion1.setFont(new java.awt.Font("Roboto Black", 1, 36)); // NOI18N
+        lblIniciarSesion1.setForeground(new java.awt.Color(0, 0, 102));
+        lblIniciarSesion1.setText("SISTEMA MAK");
+        jpnlBackground.add(lblIniciarSesion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 20, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,6 +149,15 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pfContrasenaActionPerformed
 
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+        // TODO add your handling code here:
+        
+        MenuAdministradorVista menuAdmin = new MenuAdministradorVista();
+        menuAdmin.setVisible(true);
+        this.dispose();
+        
+    }//GEN-LAST:event_btnEntrarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -173,35 +175,37 @@ public class InicioSesionVista2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InicioSesionVista2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InicioSesionVista2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InicioSesionVista2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InicioSesionVista2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InicioSesionForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InicioSesionVista2().setVisible(true);
+                new InicioSesionForm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JPanel jpnlBackground;
     private javax.swing.JLabel lblContrasena;
-    private javax.swing.JLabel lblEntrar;
     private javax.swing.JLabel lblIniciarSesion;
+    private javax.swing.JLabel lblIniciarSesion1;
     private javax.swing.JLabel lblUsuario;
     private javax.swing.JPasswordField pfContrasena;
-    private javax.swing.JPanel pnlEntrar;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
 }
