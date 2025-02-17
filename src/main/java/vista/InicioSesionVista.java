@@ -4,6 +4,8 @@
  */
 package vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Dell Core i7
@@ -30,12 +32,11 @@ public class InicioSesionVista extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtUsuarioSesion = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton4 = new javax.swing.JButton();
+        txtUsuarioContraseña = new javax.swing.JTextField();
+        btnEntrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -80,44 +81,38 @@ public class InicioSesionVista extends javax.swing.JFrame {
         });
         jpnlBackground.add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 430, 200, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agile1.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jpnlBackground.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 1010, 280));
-
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Usuario:");
         jpnlBackground.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 340, -1, -1));
-        jpnlBackground.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 160, -1));
+        jpnlBackground.add(txtUsuarioSesion, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 160, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Contraseña:");
         jpnlBackground.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 370, -1, -1));
-        jpnlBackground.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 160, -1));
+        jpnlBackground.add(txtUsuarioContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 160, -1));
 
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setText("Entrar");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btnEntrarActionPerformed(evt);
             }
         });
-        jpnlBackground.add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
+        jpnlBackground.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 410, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jpnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 158, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(jpnlBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,9 +130,17 @@ public class InicioSesionVista extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
+          PersonaController pC=new PersonaController();
+       int estado=pC.verificarCredenciales(txtUsuario.getText(), pswClave.getText());
+       if(estado!=0){
+           Menu m=new Menu();
+           m.setVisible(true);
+           this.dispose();
+       }else{
+           JOptionPane.showMessageDialog(null, "Ingrese credenciales válidas");
+       }
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -175,16 +178,15 @@ public class InicioSesionVista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEntrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JPanel jpnlBackground;
+    private javax.swing.JTextField txtUsuarioContraseña;
+    private javax.swing.JTextField txtUsuarioSesion;
     // End of variables declaration//GEN-END:variables
 }

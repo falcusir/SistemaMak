@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import javax.swing.JOptionPane;
+import modelo.PersonaModelo;
 import modelo.UsuarioModelo;
 
 /**
@@ -28,12 +30,11 @@ public class UsuarioControlador {
     PreparedStatement ejecutar;
     //obtener resultados de la consulta/estructura de datos--colecciones--fila o conjunto de resultados
     ResultSet resultado;
-    
-    
+
       public int verificarCredenciales(String usuario, String clave) {
         int estado = 0;
         try {
-            CallableStatement ejecutar = conectado.prepareCall("{call sp_InicioSesion('" + usuario + "','" + clave + "',?)}");
+            CallableStatement ejecutar = conectado.prepareCall("{call sp_obtenerRolUsuario('" + usuario + "','" + clave + "',?)}");
             ejecutar.registerOutParameter(1, Types.INTEGER);
             ejecutar.execute();
             estado = ejecutar.getInt(1);
